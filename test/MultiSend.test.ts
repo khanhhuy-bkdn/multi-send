@@ -20,14 +20,16 @@ describe("MultiSend Contract", function () {
         [owner, addr1, addr2, addr3, addr4, addr5] = signers;
         
         // Deploy MockToken
-        const MockToken: MockToken__factory = await ethers.getContractFactory("MockToken");
-        mockToken = await MockToken.deploy("Test Token", "TEST", 1000000);
-        await mockToken.waitForDeployment();
+        const MockTokenFactory = await ethers.getContractFactory("MockToken");
+        const deployedMockToken = await MockTokenFactory.deploy("Test Token", "TEST", 1000000);
+        await deployedMockToken.waitForDeployment();
+        mockToken = deployedMockToken as unknown as MockToken;
         
         // Deploy MultiSend
-        const MultiSend: MultiSend__factory = await ethers.getContractFactory("MultiSend");
-        multiSend = await MultiSend.deploy();
-        await multiSend.waitForDeployment();
+        const MultiSendFactory = await ethers.getContractFactory("MultiSend");
+        const deployedMultiSend = await MultiSendFactory.deploy();
+        await deployedMultiSend.waitForDeployment();
+        multiSend = deployedMultiSend as unknown as MultiSend;
         
         // Prepare 500 recipients (use available signers and create additional addresses)
         const availableSigners = signers.slice(6, Math.min(506, signers.length));

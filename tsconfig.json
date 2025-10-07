@@ -13,7 +13,8 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "typeRoots": ["./node_modules/@types", "./typechain-types"]
+    "typeRoots": ["./node_modules/@types", "./typechain-types"],
+    "types": []
   },
   "include": [
     "./scripts/**/*",

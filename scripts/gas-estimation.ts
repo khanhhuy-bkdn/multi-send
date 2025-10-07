@@ -26,12 +26,14 @@ async function estimateGasCosts(): Promise<GasResult[]> {
     console.log("📦 Deploying test contracts...");
     
     const MockToken = await ethers.getContractFactory("MockToken");
-    const mockToken = await MockToken.deploy("Test Token", "TEST", 1000000) as MockToken;
-    await mockToken.waitForDeployment();
+    const deployedMockToken = await MockToken.deploy("Test Token", "TEST", 1000000);
+    await deployedMockToken.waitForDeployment();
+    const mockToken = deployedMockToken as unknown as MockToken;
     
     const MultiSend = await ethers.getContractFactory("MultiSend");
-    const multiSend = await MultiSend.deploy() as MultiSend;
-    await multiSend.waitForDeployment();
+    const deployedMultiSend = await MultiSend.deploy();
+    await deployedMultiSend.waitForDeployment();
+    const multiSend = deployedMultiSend as unknown as MultiSend;
     
     const [signer] = await ethers.getSigners();
     

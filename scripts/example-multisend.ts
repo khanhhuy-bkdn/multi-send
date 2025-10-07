@@ -152,7 +152,7 @@ async function executeMultiSend(): Promise<MultiSendResults> {
     console.log("📝 Sender address:", signer.address);
     
     // Connect to contracts
-    const multiSend = await ethers.getContractAt("MultiSend", CONFIG.MULTISEND_ADDRESS) as MultiSend;
+    const multiSend = await ethers.getContractAt("MultiSend", CONFIG.MULTISEND_ADDRESS) as unknown as MultiSend;
     const token = await ethers.getContractAt("IERC20", CONFIG.TOKEN_ADDRESS);
     
     // Check balances and allowances
@@ -254,7 +254,7 @@ async function executeMultiSendBNB(): Promise<MultiSendResults> {
     const amount = ethers.parseEther("0.001"); // 0.001 BNB per recipient
     
     const [signer] = await ethers.getSigners();
-    const multiSend = await ethers.getContractAt("MultiSend", CONFIG.MULTISEND_ADDRESS) as MultiSend;
+    const multiSend = await ethers.getContractAt("MultiSend", CONFIG.MULTISEND_ADDRESS) as unknown as MultiSend;
     
     const gasPrice = ethers.parseUnits(CONFIG.GAS_PRICE_GWEI.toString(), "gwei");
     const totalAmount = amount * BigInt(recipients.length);
